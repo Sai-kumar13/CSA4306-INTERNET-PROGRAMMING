@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eeeeee;
+            padding: 30px;
+        }
+
+        form {
+            background: white;
+            max-width: 400px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+
+        button {
+            background: #1769aa;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 100%;
+        }
+
+        #success {
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+<form id="registerForm">
+    <h2>Registration Form</h2>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" required>
+    <p class="error" id="emailError"></p>
+
+    <label for="phone">Phone Number:</label>
+    <input type="tel" id="phone"
+           inputmode="numeric"
+           maxlength="10"
+           required>
+    <p class="error" id="phoneError"></p>
+
+    <button type="submit">Register</button>
+    <p id="success"></p>
+</form>
+
+<script>
+    const form = document.getElementById("registerForm");
+    const email = document.getElementById("email");
+    const phone = document.getElementById("phone");
+
+    function validateEmail() {
+        const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!pattern.test(email.value.trim())) {
+            document.getElementById("emailError").textContent =
+                "Enter a valid email address.";
+            return false;
+        }
+
+        document.getElementById("emailError").textContent = "";
+        return true;
+    }
+
+    function validatePhone() {
+        const pattern = /^[6-9]\d{9}$/;
+
+        if (!pattern.test(phone.value)) {
+            document.getElementById("phoneError").textContent =
+                "Enter a valid 10-digit Indian mobile number.";
+            return false;
+        }
+
+        document.getElementById("phoneError").textContent = "";
+        return true;
+    }
+
+    email.addEventListener("input", validateEmail);
+    phone.addEventListener("input", validatePhone);
+
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const validEmail = validateEmail();
+        const validPhone = validatePhone();
+
+        if (validEmail && validPhone) {
+            document.getElementById("success").textContent =
+                "Validation successful!";
+        } else {
+            document.getElementById("success").textContent = "";
+        }
+    });
+</script>
+
+</body>
+</html>

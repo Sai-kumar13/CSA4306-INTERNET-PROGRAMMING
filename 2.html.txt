@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<body>
+<p id="para">JavaScript is easy to learn.</p>
+<button onclick="changeColor()">Change Color</button>
+<script>
+function changeColor() {
+    document.getElementById("para").style.color = "red";
+}
+</script>
+</body>
+</html>
